@@ -1,0 +1,25 @@
+{
+  "name": "vg-dataviz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "geolib": "^3.3.1",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0",
+    "plotly.js-dist": "^1.57.1",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "webpack": "^5.5.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
