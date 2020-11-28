@@ -74,7 +74,7 @@ request('https://tracking2020.vendeeglobe.org/data/race/tracker_config.hwx?v=202
 			const {id, loc} = track;
 			const name = boatIds[id];
 			let currentRouteIndex = 0;
-			const routeRange = 5;
+			const routeRange = 3;
 			if(typeof(name) === 'string'){
 				const positions0 = Object.fromEntries([
 					id,
@@ -140,7 +140,7 @@ request('https://tracking2020.vendeeglobe.org/data/race/tracker_config.hwx?v=202
 						knots,
 						vmg
 					].map((v,i) => [posColumns[i], v]));
-					if(knots>500 || vmg > 500 || knots*3 < Math.abs(vmg)){
+					if(knots>500 || vmg > 500 || knots*6 < Math.abs(vmg)){
 						console.log(new Date(lastReport.date), new Date(res1.timestamp*1000))
 						console.log(JSON.stringify({
 							point: {latitude, longitude},

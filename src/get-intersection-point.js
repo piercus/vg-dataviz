@@ -1,4 +1,5 @@
 const {getDistance, getRhumbLineBearing, getLatitude, getLongitude, toRad, toDeg} = require('geolib');
+const getBarycenter = require('./get-barycenter')
 
 const robustAcos = (value) => {
     if (value > 1) {
@@ -11,42 +12,6 @@ const robustAcos = (value) => {
     return value;
 };
 
-const getBarycenter = (points, weights) => {
-    if (
-			Array.isArray(points) === false
-			|| points.length === 0
-			|| Array.isArray(weights) === false
-			|| weights.length !== points.length
-		) {
-
-        return false;
-    }
-
-    const totalWeight = weights.reduce((a,b) => a + b, 0);
-
-    const sum = points.map((a, i) => ({point: a, weight: weights[i]})).reduce(
-        (acc, {point, weight}) => {
-            const pointLat = toRad(getLatitude(point));
-            const pointLon = toRad(getLongitude(point));
-
-            return {
-                X: acc.X + Math.cos(pointLat) * Math.cos(pointLon) * weight,
-                Y: acc.Y + Math.cos(pointLat) * Math.sin(pointLon) * weight,
-                Z: acc.Z + Math.sin(pointLat) * weight,
-            };
-        },
-        { X: 0, Y: 0, Z: 0 }
-    );
-
-    const X = sum.X / totalWeight;
-    const Y = sum.Y / totalWeight;
-    const Z = sum.Z / totalWeight;
-
-    return {
-        longitude: toDeg(Math.atan2(Y, X)),
-        latitude: toDeg(Math.atan2(Z, Math.sqrt(X * X + Y * Y))),
-    };
-};
 
 // Returns the projection point from a point to a line
 module.exports = (
@@ -80,7 +45,8 @@ module.exports = (
 					intersection: lineStart,
 					side: side ? 'left' : 'right',
 					distance: d1,
-					ratio: 1
+					ratio: 1,
+					directionLine
 				};
     }
 
@@ -90,7 +56,8 @@ module.exports = (
 					intersection: lineEnd,
 					side: side ? 'left' : 'right',
 					distance: d2,
-					ratio: 0
+					ratio: 0,
+					directionLine
 				};
     }
 
@@ -99,6 +66,7 @@ module.exports = (
     return {
 			intersection: getBarycenter([lineStart, lineEnd], [Math.cos(beta)*d2, Math.cos(alpha)*d1]),
 			distance: Math.sin(alpha) * d1,
+			directionLine,
 			side: side ? 'left' : 'right',
 			ratio: Math.cos(beta)*d2/(Math.cos(alpha)*d1+Math.cos(beta)*d2)
 		};
