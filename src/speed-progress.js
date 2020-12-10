@@ -23,35 +23,7 @@ const vPoints = [{
 }];
 
 module.exports = function({reports, route, positions, tagId = 'myDiv'}){
-  const names = uniq(reports, 'name').slice(0,3);
-  const data = names.map(name => {
-    const filtered = reports.filter(r => {
-      return r.name === name && parseFloat(r.dtf) <= totalDist && r.dtf !== 0
-    });
-
-    const x = unpack(filtered, r => {
-      const num = (totalDist - parseFloat(r.dtf))/totalDist*100;
-      if(Number.isNaN(num)){
-        console.log('NaN', num)
-      }
-      return num
-    });
-    const speed = unpack(filtered, 'speed');
-    const vmg = unpack(filtered, 'vmg');
-    const text1 = unpack(filtered, (r,i) => {
-      return (new Date(r.date)).toLocaleString()+"<br>progress:"+x[i].toFixed(1)+' %<br>speed: '+speed[i]+' knts<br>vmg: '+vmg[i]+' knts';
-    });
-    return {
-      type: 'scatter',
-      y: speed.concat(vmg.reverse()),
-      x: x.concat(x.concat().reverse()),
-      text: text1.concat(text1.concat().reverse()),
-      fill: 'toself',
-      hoveron: 'points+fills',
-      name,
-      hoverinfo: 'text'
-    }
-  });
+  const names = uniq(reports, 'name').filter(n => typeof(n) === 'string');
 
   const data2 = names.map(name => {
     const filtered = positions.filter(r => {
@@ -61,14 +33,13 @@ module.exports = function({reports, route, positions, tagId = 'myDiv'}){
     const x = unpack(filtered, r => {
       const num = r.progress*100;
       if(Number.isNaN(num)){
-        console.log('NaN', num)
+        console.log('NaN', num, r.progress, {name})
       }
       return num
     });
     const speed = unpack(filtered, 'knots');
     const vmg = unpack(filtered, 'vmg');
     const text1 = unpack(filtered, (r,i) => {
-      console.log(new Date(r.timestamp*1000))
       return (new Date(r.timestamp*1000)).toLocaleString()+"<br>progress:"+x[i].toFixed(1)+' %<br>speed: '+speed[i]+' knts<br>vmg: '+vmg[i]+' knts';
     });
     return {
@@ -83,11 +54,11 @@ module.exports = function({reports, route, positions, tagId = 'myDiv'}){
     }
   });
 
-
+  const shapeData = []
   const shapes = [];
   vPoints.forEach(({dist, name}) => {
     const x = (totalDist-dist)/totalDist*100;
-    data.push({
+    shapeData.push({
       type: 'scatter',
       y: [-1],
       x: [x],
@@ -112,7 +83,6 @@ module.exports = function({reports, route, positions, tagId = 'myDiv'}){
 
   })
 
-
   const layout = {
     xaxis: {
       title: 'Progress (%)'
@@ -124,5 +94,5 @@ module.exports = function({reports, route, positions, tagId = 'myDiv'}){
     title: 'Speed vs Progress'
   };
 
-  Plotly.newPlot(tagId, data.concat(data2), layout);
+  Plotly.newPlot(tagId, data2.concat(shapeData), layout);
 }

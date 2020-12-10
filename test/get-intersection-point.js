@@ -13,6 +13,22 @@ test('simple intersection', t => {
 			latitude: 44.63857,
 			longitude: -7.88044
 	});
+	// console.log(res)
+	t.true(res.ratio < 0.01);
+})
+
+test('simple intersection  2', t => {
+	const res = getIntersectionPoint({
+			"latitude":-2,
+			"longitude":2
+		},{
+			"latitude":-1,
+			"longitude":0
+		},{
+			"latitude":0,
+			"longitude":0
+	});
 	console.log(res)
-	t.true(res.ratio > 0.99);
+
+	t.true(res.ratio < 0);
 })

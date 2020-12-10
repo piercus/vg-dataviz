@@ -29,6 +29,9 @@ module.exports = (points, weights) => {
     const X = sum.X / totalWeight;
     const Y = sum.Y / totalWeight;
     const Z = sum.Z / totalWeight;
+		if(Number.isNaN(X)){
+			throw(new Error('X is NaN'))
+		}
     return {
         longitude: toDeg(Math.atan2(Y, X)),
         latitude: toDeg(Math.atan2(Z, Math.sqrt(X * X + Y * Y))),
