@@ -57,8 +57,9 @@ Plotly.d3.json('./data.json', (err, json) => {
 			shapes: shapesLayout,
 			title: 'Vendée Globe 2020, race charts'
 		};
+		var config = {responsive: true}
 
-		Plotly.newPlot('my-div', data1.concat(data2).concat(shapesData), layout);
+		Plotly.newPlot('my-div', data1.concat(data2).concat(shapesData), layout, config);
 		const spinner = document.getElementById('spinner')
 		spinner.remove();
 	}
