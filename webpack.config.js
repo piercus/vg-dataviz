@@ -5,7 +5,8 @@ module.exports = {
 	devtool: false,
 	entry: './src/index.js',
 	output: {
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		path: path.resolve(__dirname, 'docs')
 	},
 	optimization: {
 	  minimize: false

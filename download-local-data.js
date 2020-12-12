@@ -22,5 +22,5 @@ Promise.all([
 		trackerReports,
 		trackerTracks
 	});
-	fs.writeFileSync('dist/data.json', JSON.stringify(res));
+	fs.writeFileSync('docs/data.json', JSON.stringify(res));
 }).catch(error => console.log(error));
