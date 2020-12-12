@@ -6,7 +6,6 @@ Plotly.d3.json('./data.json', (err, json) => {
 	} else {
 		const data1 = require('./speed-progress-data.js')(json, {xaxis: 'x', yaxis: 'y', showlegend: true});
 		const data2 = require('./dist-to-first-progress-data.js')(json, {xaxis: 'x2', yaxis: 'y2'});
-		console.log(data1[0]);
 		const {shapesLayout, shapesData} = require('./progress-cues')({
 			configs: [{
 				xaxis: 'x', yaxis: 'y', ymax: Math.max(...data1.map(b => Math.max(...b.y)))
@@ -15,9 +14,15 @@ Plotly.d3.json('./data.json', (err, json) => {
 			}]
 		});
 		const layout = {
+      plot_bgcolor:"#00395E",
+      paper_bgcolor:"#00395E",
 			xaxis: {
 				domain: [0, 1],
 				anchor: 'y'
+			},
+			font: {
+				family: 'Courier New, monospace',
+				color: '#ffffff'
 			},
 			xaxis2: {
 				domain: [0, 1],
@@ -54,5 +59,7 @@ Plotly.d3.json('./data.json', (err, json) => {
 		};
 
 		Plotly.newPlot('my-div', data1.concat(data2).concat(shapesData), layout);
+		const spinner = document.getElementById('spinner')
+		spinner.remove();
 	}
 });
