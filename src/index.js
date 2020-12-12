@@ -1,19 +1,19 @@
 const Plotly = require('plotly.js-dist');
 
-Plotly.d3.json('./data.json', function(err, json){
-	if(err){
-		console.log('err', err)
+Plotly.d3.json('./data.json', (err, json) => {
+	if (err) {
+		console.log('err', err);
 	} else {
-		const data1 = require('./speed-progress-data.js')(json, {xaxis: 'x', yaxis: 'y', showlegend: true})
-		const data2 = require('./dist-to-first-progress-data.js')(json, {xaxis: 'x2', yaxis: 'y2'})
-		console.log(data1[0])
+		const data1 = require('./speed-progress-data.js')(json, {xaxis: 'x', yaxis: 'y', showlegend: true});
+		const data2 = require('./dist-to-first-progress-data.js')(json, {xaxis: 'x2', yaxis: 'y2'});
+		console.log(data1[0]);
 		const {shapesLayout, shapesData} = require('./progress-cues')({
-			configs : [{
+			configs: [{
 				xaxis: 'x', yaxis: 'y', ymax: Math.max(...data1.map(b => Math.max(...b.y)))
-			},{
+			}, {
 				xaxis: 'x2', yaxis: 'y2', ymax: Math.max(...data2.map(b => Math.max(...b.y))), showlegend: true
 			}]
-		})
+		});
 		const layout = {
 			xaxis: {
 				domain: [0, 1],
@@ -55,4 +55,4 @@ Plotly.d3.json('./data.json', function(err, json){
 
 		Plotly.newPlot('my-div', data1.concat(data2).concat(shapesData), layout);
 	}
-})
+});

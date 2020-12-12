@@ -1,6 +1,6 @@
 const fs = require('fs');
-const parse = require('./request/parse')
-const parseData = require('./src/parse-data')
+const parse = require('./request/parse');
+const parseData = require('./src/parse-data');
 
 Promise.all([
 	parse(fs.readFileSync('test/data/tracker_config.hwx'), 'xml'),
@@ -22,5 +22,5 @@ Promise.all([
 		trackerReports,
 		trackerTracks
 	});
-	fs.writeFileSync(`dist/data.json`, JSON.stringify(res));
-}).catch(err => console.log(err))
+	fs.writeFileSync('dist/data.json', JSON.stringify(res));
+}).catch(error => console.log(error));

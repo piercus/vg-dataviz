@@ -1,8 +1,7 @@
-const unpack = require('./unpack')
+const unpack = require('./unpack');
 
-module.exports = function(rows, fn) {
-	const arr = unpack(rows, fn);
-  return arr.filter((a, index) => arr.indexOf(a) === index)
-}
-  
+module.exports = function (rows, fn) {
+	const array = unpack(rows, fn);
+	return array.filter((a, index) => array.indexOf(a) === index);
+};
 

@@ -1,7 +1,7 @@
-const parseData = require('../src/parse-data')
-const test = require('ava')
+const parseData = require('../src/parse-data');
+const test = require('ava');
 const fs = require('fs');
-const parse = require('../request/parse')
+const parse = require('../request/parse');
 test('parse data', t => {
 	return Promise.all([
 		parse(fs.readFileSync('test/data/shapes.hwx')),
@@ -23,9 +23,8 @@ test('parse data', t => {
 			trackerReports,
 			trackerTracks
 		});
-		// console.log({res})
+		// Console.log({res})
 		t.is(res.positions.length, 38839);
 		t.is(res.boats['1'].color, '#04ECFF');
-	})
-
+	});
 });

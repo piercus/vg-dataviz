@@ -1,5 +1,5 @@
-const request = require('./request/request.js')
-const parseData = require('./src/parse-data')
+const request = require('./request/request.js');
+const parseData = require('./src/parse-data');
 const fs = require('fs');
 Promise.all([
 	request('https://tracking2020.vendeeglobe.org/data/race/tracker_config.hwx?v=20201118074443', 'xml'),
@@ -21,5 +21,5 @@ Promise.all([
 		trackerReports,
 		trackerTracks
 	});
-	fs.writeFileSync(`dist/data.json`, JSON.stringify(res));
-}).catch(err => console.log(err))
+	fs.writeFileSync('dist/data.json', JSON.stringify(res));
+}).catch(error => console.log(error));
