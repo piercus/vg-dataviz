@@ -1,6 +1,6 @@
 const request = require('./request/request.js')
 const parseData = require('./src/parse-data')
-
+const fs = require('fs');
 Promise.all([
 	request('https://tracking2020.vendeeglobe.org/data/race/tracker_config.hwx?v=20201118074443', 'xml'),
 	request('https://tracking2020.vendeeglobe.org/data/race/tracker_reports.hwx?v=20201119135938'),

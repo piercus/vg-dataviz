@@ -5,7 +5,7 @@ module.exports = function(url, mode = 'json'){
 	      responseType: 'arraybuffer'
 	  }).then(response => {
 
-		return parse(response.data);
+		return parse(response.data, mode);
 	})
 }
 

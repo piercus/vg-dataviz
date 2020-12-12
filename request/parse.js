@@ -80,9 +80,9 @@ module.exports = function(data, mode = 'json'){
 	// const buf = Buffer.from(response.data, 'utf8');
 	const text = new TextDecoder("utf-8").decode(buf);
   if(mode === 'json'){
-    return Promise.resolve(JSON.parse(text))
+    return Promise.resolve(JSON.parse(text));
   } else if(mode ==='xml') {
-    return parser.parseStringPromise(text)
+    return parser.parseStringPromise(text);
   }
 }
 
