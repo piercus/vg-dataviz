@@ -2,20 +2,20 @@ const totalDist = 24296.5;
 const equateurDist = 21296.9;
 
 const vPoints = [{
-	name: 'Cabo Touriñán',
+	name: 'Cap Touriñan',
 	dist: 23927
 }, {
-	dist: 23021,
-	name: 'Canary Islands'
-}, {
 	dist: 22282,
-	name: 'Cap verde'
+	name: 'Cap Vert'
 }, {
 	dist: 21296.9,
-	name: 'Equator'
+	name: 'Equateur'
 }, {
 	dist: 17770,
-	name: 'Cap Bonne Espérance'
+	name: 'Cap de Bonne Espérance'
+}, {
+	dist: 15265,
+	name: 'Kerguelen'
 }];
 const shapesLayout = [];
 const shapesData = [];

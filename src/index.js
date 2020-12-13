@@ -27,14 +27,14 @@ Plotly.d3.json('./data.json', (err, json) => {
 			xaxis2: {
 				domain: [0, 1],
 				title: {
-					text: 'Progress (%)'
+					text: 'Progression (%)'
 				},
 				anchor: 'y2'
 			},
 			yaxis: {
 				domain: [0.52, 1],
 				title: {
-					text: 'Speed (boat/VMG)<br>(knots)',
+					text: 'Vitesse (bateau/VMG)<br>(noeuds)',
 					font: {
 						size: 10
 					}
@@ -44,7 +44,7 @@ Plotly.d3.json('./data.json', (err, json) => {
 			yaxis2: {
 				domain: [0, 0.48],
 				title: {
-					text: 'Distance to leader<br>(nm)',
+					text: 'Distance au premier<br>(nm)',
 					font: {
 						size: 10
 					}
@@ -55,7 +55,7 @@ Plotly.d3.json('./data.json', (err, json) => {
 				tracegroupgap: 0
 			},
 			shapes: shapesLayout,
-			title: 'Vendée Globe 2020, race charts'
+			title: 'Vendée Globe 2020, graphiques'
 		};
 		var config = {responsive: true}
 
