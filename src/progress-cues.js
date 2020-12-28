@@ -20,11 +20,17 @@ const vPoints = [{
 const shapesLayout = [];
 const shapesData = [];
 
-module.exports = function ({configs}) {
+module.exports = function (json, {configs}) {
 	vPoints.forEach(({dist, name}, vPointId) => {
   	const x = (totalDist - dist) / totalDist * 100;
+		const minProgress = Math.min(...json.positions.map(({progress}) => progress))*100
+		const maxProgress = Math.max(...json.positions.map(({progress}) => progress))*100
 
+		if(x < minProgress || x > maxProgress){
+			return
+		}
 		configs.map(({xaxis = 'x', yaxis = 'y', ymax, showlegend = false}) => {
+
 			if (showlegend) {
 				shapesData.push({
 					type: 'scatter',

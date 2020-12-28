@@ -170,27 +170,27 @@ module.exports = function ({
 					angle,
 					routeAngle
 				].map((v, i) => [posColumns[i], v]));
-				if (speedMade > 500) {
-					console.log(resRoute);
-					console.log(JSON.stringify(getRouteProgressOptions));
-					console.log(positions[i]);
-
-					// Console.log(new Date(lastReport.date), new Date(res1.timestamp*1000))
-					// console.log(JSON.stringify({
-					// 	point: {latitude, longitude},
-					// 	currentRouteIndex,
-					// 	routeRange,
-					// 	route
-					// }))
-					// console.log('routeIndex',
-					// 	positions[i],
-					// 	resRoute,
-					// 	res1,
-					// 	i
-					// );
-					// console.log({vmg, knots}, positions[i].routeDistance/1000, resRoute.routeDistance/1000, timeSecs)
-					throw (new Error('invalid knots'));
-				}
+				// if (speedMade > 500) {
+				// 	console.log(resRoute);
+				// 	console.log(JSON.stringify(getRouteProgressOptions));
+				// 	console.log(positions[i]);
+				//
+				// 	// Console.log(new Date(lastReport.date), new Date(res1.timestamp*1000))
+				// 	// console.log(JSON.stringify({
+				// 	// 	point: {latitude, longitude},
+				// 	// 	currentRouteIndex,
+				// 	// 	routeRange,
+				// 	// 	route
+				// 	// }))
+				// 	// console.log('routeIndex',
+				// 	// 	positions[i],
+				// 	// 	resRoute,
+				// 	// 	res1,
+				// 	// 	i
+				// 	// );
+				// 	// console.log({vmg, knots}, positions[i].routeDistance/1000, resRoute.routeDistance/1000, timeSecs)
+				// 	throw (new Error('invalid knots'));
+				// }
 
 				positions.push(Object.assign({}, res1, resRoute));
 			});

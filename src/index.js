@@ -1,12 +1,54 @@
 const Plotly = require('plotly.js-dist');
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let paramBoats = urlParams.get('boats')
+if(paramBoats){
+	paramBoats = paramBoats.split(',')
+}
+let paramStart= urlParams.get('start')
+if(paramStart){
+	paramStart = new Date(parseInt(paramStart, 10))
+}
+let paramEnd= urlParams.get('end')
+if(paramEnd){
+	paramEnd = new Date(parseInt(paramEnd, 10))
+}
 
-Plotly.d3.json('./data.json', (err, json) => {
+const filterWithParams = function(opts, {paramBoats, paramStart, paramEnd}){
+	const filteredPositions = opts.positions.filter(({id, timestamp}) => (
+		(!(paramBoats && paramBoats.length > 0) || paramBoats.includes(id.toString())) &&
+		(!(paramStart) || paramStart < new Date(timestamp * 1000)) &&
+		(!(paramEnd) || paramEnd > new Date(timestamp * 1000))
+	))
+
+	const filteredReports = opts.reports.filter(({boat, date}) => (
+		(!(paramBoats && paramBoats.length > 0) || paramBoats.includes(boat)) &&
+		(!(paramStart) || paramStart < new Date(date)) &&
+		(!(paramEnd) || paramEnd > new Date(date))
+	))
+	filteredReports.forEach(o => {
+		o.fullName = o.name + ' ('+o.boat+')'
+	})
+	filteredPositions.forEach(o => {
+		o.fullName = o.name + ' ('+o.id+')'
+	})
+	return Object.assign({}, opts, {
+		reports: filteredReports,
+		positions: filteredPositions
+	})
+};
+
+console.log({paramBoats})
+Plotly.d3.json('./data.json', (err, json1) => {
+	const json = filterWithParams(json1, {paramBoats, paramStart, paramEnd})
+
 	if (err) {
 		console.log('err', err);
 	} else {
+
 		const data1 = require('./speed-progress-data.js')(json, {xaxis: 'x', yaxis: 'y', showlegend: true});
 		const data2 = require('./dist-to-first-progress-data.js')(json, {xaxis: 'x2', yaxis: 'y2'});
-		const {shapesLayout, shapesData} = require('./progress-cues')({
+		const {shapesLayout, shapesData} = require('./progress-cues')(json, {
 			configs: [{
 				xaxis: 'x', yaxis: 'y', ymax: Math.max(...data1.map(b => Math.max(...b.y)))
 			}, {
