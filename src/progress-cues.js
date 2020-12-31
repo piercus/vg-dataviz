@@ -35,7 +35,7 @@ module.exports = function (json, {configs}) {
 		if(x < minProgress || x > maxProgress){
 			return
 		}
-		configs.map(({xaxis = 'x', yaxis = 'y', ymax, showlegend = false}) => {
+		configs.map(({xaxis = 'x', yaxis = 'y', ymax, ymin=0, showlegend = false}) => {
 
 			if (showlegend) {
 				shapesData.push({
@@ -54,7 +54,7 @@ module.exports = function (json, {configs}) {
 			shapesLayout.push({
     		type: 'line',
     		x0: x,
-    		y0: 0,
+    		y0: ymin,
     		x1: x,
     		y1: ymax,
 				xref: xaxis,

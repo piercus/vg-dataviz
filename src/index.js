@@ -50,9 +50,16 @@ Plotly.d3.json('./data.json', (err, json1) => {
 		const data2 = require('./dist-to-first-progress-data.js')(json, {xaxis: 'x2', yaxis: 'y2'});
 		const {shapesLayout, shapesData} = require('./progress-cues')(json, {
 			configs: [{
-				xaxis: 'x', yaxis: 'y', ymax: Math.max(...data1.map(b => Math.max(...b.y)))
+				xaxis: 'x',
+				yaxis: 'y',
+				ymax: Math.max(...data1.map(b => Math.max(...b.y))),
+				ymin: Math.min(...data1.map(b => Math.max(...b.y)))
 			}, {
-				xaxis: 'x2', yaxis: 'y2', ymax: Math.max(...data2.map(b => Math.max(...b.y))), showlegend: true
+				xaxis: 'x2',
+				yaxis: 'y2',
+				ymax: Math.max(...data1.map(b => Math.max(...b.y))),
+				ymin: Math.min(...data1.map(b => Math.max(...b.y))),
+				showlegend: true
 			}]
 		});
 		const layout = {
