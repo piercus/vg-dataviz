@@ -53,12 +53,12 @@ Plotly.d3.json('./data.json', (err, json1) => {
 				xaxis: 'x',
 				yaxis: 'y',
 				ymax: Math.max(...data1.map(b => Math.max(...b.y))),
-				ymin: Math.min(...data1.map(b => Math.max(...b.y)))
+				ymin: 0
 			}, {
 				xaxis: 'x2',
 				yaxis: 'y2',
-				ymax: Math.max(...data1.map(b => Math.max(...b.y))),
-				ymin: Math.min(...data1.map(b => Math.max(...b.y))),
+				ymax: Math.max(...data2.map(b => Math.max(...b.y))),
+				ymin: Math.min(...data2.map(b => Math.min(...b.y))),
 				showlegend: true
 			}]
 		});

@@ -40,7 +40,7 @@ module.exports = function (json, {configs}) {
 			if (showlegend) {
 				shapesData.push({
 					type: 'scatter',
-					y: [vPointId % 2 === 0 ? -ymax / 10 : -2 * ymax / 10],
+					y: [vPointId % 2 === 0 ? -ymax / 10 + ymin : -2 * ymax / 10 + ymin],
 					x: [x],
 					xaxis,
 					yaxis,
