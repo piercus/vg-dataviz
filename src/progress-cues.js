@@ -16,6 +16,12 @@ const vPoints = [{
 }, {
 	dist: 15265,
 	name: 'Kerguelen'
+}, {
+	dist: 13511,
+	name: 'Cap Leeuwin'
+}, {
+	dist: 8896,
+	name: 'Point Nemo'
 }];
 const shapesLayout = [];
 const shapesData = [];
